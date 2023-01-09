@@ -1,13 +1,22 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PetugasController;
 use Illuminate\Support\Facades\Route;
 
+Route::group(['controller' => PetugasController::class], function () {
+    Route::get('/', 'index')->name('home');
+    Route::prefix('petugas')->group(function () {
+        Route::get('tambah-data', 'create')->name('petugas.tambah');
+    });
+});
 
-Auth::routes();
+Route::group(['controller' => BukuController::class], function () {
+    Route::prefix('buku')->group(function () {
+        Route::get('/', 'index');
+        Route::get('tambah-data', 'create')->name('buku.tambah');
+    });
+});
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');

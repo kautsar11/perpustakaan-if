@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -41,5 +42,28 @@ class LoginController extends Controller
     public function index()
     {
         return view('auth.login');
+    }
+
+    public function store()
+    {
+        $credentials = request()->validate([
+            'nim' => ['required', 'number'],
+            'password' => ['required']
+        ]);
+
+        if (!auth()->attempt($credentials)) {
+            // throw ValidationException::withMessages(['Data yang anda masukkan tidak sesua'])
+        }
+
+        session()->regenerate();
+
+        return redirect('/');
+    }
+
+    public function destroy()
+    {
+        auth()->logout();
+
+        return redirect('login');
     }
 }

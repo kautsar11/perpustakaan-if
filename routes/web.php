@@ -19,4 +19,4 @@ Route::group(['controller' => BukuController::class], function () {
     });
 });
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index']);

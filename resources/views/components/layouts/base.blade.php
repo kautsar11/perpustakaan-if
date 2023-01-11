@@ -18,6 +18,9 @@
       rel="stylesheet"
     />
 
+    {{-- alpine js --}}
+    <script src="//unpkg.com/alpinejs" defer></script>
+    
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
 </head>

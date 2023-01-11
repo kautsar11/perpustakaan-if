@@ -3,41 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
 
     public function index()
     {
@@ -46,18 +16,27 @@ class LoginController extends Controller
 
     public function store()
     {
-        $credentials = request()->validate([
-            'nim' => ['required', 'number'],
-            'password' => ['required']
-        ]);
+        $attributes = request()->validate(
+            [
+                'nim' => ['required', 'numeric'],
+                'password' => ['required']
+            ],
+            [
+                'nim.required' => 'Nim tidak boleh kosong',
+                'nim.numeric' => 'Nim harus berupa angka',
+                'password.required' => 'Password tidak boleh kosong',
+            ]
+        );
 
-        if (!auth()->attempt($credentials)) {
-            // throw ValidationException::withMessages(['Data yang anda masukkan tidak sesua'])
+        if (!auth()->attempt($attributes)) {
+            throw ValidationException::withMessages(
+                ['nim' => 'Data yang anda masukkan tidak sesuai']
+            );
         }
 
         session()->regenerate();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Selamat datang');
     }
 
     public function destroy()

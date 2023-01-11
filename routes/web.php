@@ -5,7 +5,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PetugasController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['controller' => PetugasController::class], function () {
+Route::group(['controller' => PetugasController::class, 'middleware' => 'auth'], function () {
     Route::get('/', 'index')->name('home');
     Route::prefix('petugas')->group(function () {
         Route::get('tambah-data', 'create')->name('petugas.tambah');
@@ -19,4 +19,8 @@ Route::group(['controller' => BukuController::class], function () {
     });
 });
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::controller(LoginController::class)->group(function () {
+    Route::get('login', 'index')->name('login');
+    Route::post('login', 'store');
+    Route::post('logout', 'destroy');
+});

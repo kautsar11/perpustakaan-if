@@ -18,7 +18,7 @@
                                     <h5 class="card-title text-center pb-0 fs-4">Login</h5>
                                 </div>
 
-                                <form class="row g-3 needs-validation" method="POST" novalidate>
+                                <form class="row g-3" action="login" method="POST" novalidate >
                                     @csrf
                                     <x-form.wrap>
                                         <x-form.input type="text" name="nim" />

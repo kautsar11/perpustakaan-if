@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -16,7 +15,7 @@ class LoginController extends Controller
 
     public function store()
     {
-        $attributes = request()->validate(
+        $credentials = request()->validate(
             [
                 'nim' => ['required', 'numeric'],
                 'password' => ['required']
@@ -28,7 +27,7 @@ class LoginController extends Controller
             ]
         );
 
-        if (!auth()->attempt($attributes)) {
+        if (!auth()->attempt($credentials)) {
             throw ValidationException::withMessages(
                 ['nim' => 'Data yang anda masukkan tidak sesuai']
             );
@@ -42,6 +41,9 @@ class LoginController extends Controller
     public function destroy()
     {
         auth()->logout();
+
+        session()->invalidate();
+        session()->regenerateToken();
 
         return redirect('login');
     }

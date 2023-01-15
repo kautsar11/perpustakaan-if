@@ -16,19 +16,31 @@
 
                 {{-- table --}}
                 <x-slot name="table">
+                    @if ($petugas->count())
                     <x-table.table :headers="['No', 'Nim', 'Nama', '']">
-                        <tr>
-                            <td scope="row"><a href="#">#2457</a></td>
-                            <td>Brandon Jacob</td>
-                            <td>
-                                <span class="badge bg-success">Approved</span>
-                            </td>
-                            <td>
-                                <x-button-link class="btn-success" href="#">Edit</x-button-link>
-                                <x-button-link class="btn-danger" href="#">Delete</x-button-link>
-                            </td>
-                        </tr>
-                    </x-table.table>
+                            @foreach ($petugas as $p)
+                                <tr>
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td>{{ $p->nim }}</td>
+                                    <td>{{ $p->nama }}</td>
+                                    <td class="d-flex">
+                                        <x-button-link class="btn-success" href="{{ route('petugas.edit', $p->nim) }}">
+                                            Edit</x-button-link>
+
+                                        <form action="{{ route('petugas.hapus', $p->nim) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-form.submit-button class="btn-danger btn-sm">Delete
+                                            </x-form.submit-button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </x-table.table>
+                        @else
+                                <p class="text-center">Tidak ada data</p>
+                        @endif
+                    {{ $petugas->links() }}
                 </x-slot>
             </x-card>
         </section>

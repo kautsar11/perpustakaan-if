@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Petugas extends Authenticatable
 {
@@ -18,4 +20,18 @@ class Petugas extends Authenticatable
     protected $primaryKey = 'nim';
     protected $keyType = 'string';
     protected $guarded = [];
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($password) => bcrypt($password),
+        );
+    }
+
+    public function scopeSearch(Builder $query, $search)
+    {
+        // $query->where('nim', 'like', '%' . $search . "%");
+        $query->when(request()->is('/'), fn () => $query
+            ->where('nim', 'like', '%' . $search . '%'));
+    }
 }

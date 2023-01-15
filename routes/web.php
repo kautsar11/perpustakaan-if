@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(['controller' => PetugasController::class, 'middleware' => 'auth'], function () {
     Route::get('/', 'index')->name('home');
     Route::prefix('petugas')->group(function () {
-        Route::get('tambah-data', 'create')->name('petugas.tambah');
+        Route::get('tambah', 'create')->name('petugas.tambah');
+        Route::post('tambah', 'store')->name('petugas.tambah.simpan');
+        Route::get('edit/{petugas:nim}', 'edit')->name('petugas.edit');
+        Route::patch('edit/{petugas:nim}', 'update')->name('petugas.edit.simpan');
+        Route::delete('hapus/{petugas:nim}', 'destroy')->name('petugas.hapus');
     });
 });
 

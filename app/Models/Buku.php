@@ -9,5 +9,12 @@ class Buku extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    public $incrementing = false;
+
+    protected $table = 'buku';
+    protected $primaryKey = 'no_buku';
+    protected $keyType = 'string';
+
     protected $guarded = [];
 }

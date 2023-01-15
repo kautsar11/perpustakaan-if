@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Buku;
 use App\Models\Petugas;
 use Illuminate\Database\Seeder;
 
@@ -35,5 +36,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('10120156'),
             'role' => 'petugas'
         ]);
+
+        Buku::factory(50)->create();
     }
 }

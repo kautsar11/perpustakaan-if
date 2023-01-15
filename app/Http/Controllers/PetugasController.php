@@ -40,7 +40,7 @@ class PetugasController extends Controller
 
     public function update(Petugas $petugas)
     {
-        $attributes = $this->validatePetugas(new Petugas());
+        $attributes = $this->validatePetugas($petugas);
 
         $petugas->update($attributes);
 
@@ -60,7 +60,7 @@ class PetugasController extends Controller
 
         return request()->validate(
             [
-                'nim' => ['required', 'numeric', Rule::unique('petugas', 'nim')->ignore($petugas->nim)],
+                'nim' => ['required', 'numeric', Rule::unique('petugas', 'nim')->ignore($petugas)],
                 'nama' => ['required'],
                 'password' => ['required']
             ],

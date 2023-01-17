@@ -7,79 +7,61 @@ use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('pages.buku.index');
+        return view('pages.buku.index', ['buku' => Buku::query()->search(request('search'))->orderBy('no_buku', 'asc')->paginate(5)]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('pages.buku.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $attributes = $this->validateBuku();
+
+        Buku::query()->create($attributes);
+
+        return redirect('buku')->with('success', 'Berhasil menyimpan data');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Buku $buku)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Buku $buku)
     {
-        //
+        return view('pages.buku.edit', ['buku' => $buku]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Buku $buku)
+    public function update(Buku $buku)
     {
-        //
+        $attributes = $this->validateBuku($buku);
+
+        $buku->update($attributes);
+
+        return redirect('buku')->with('success', 'Berhasil mengubah data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Buku $buku)
     {
-        //
+        $buku->delete();
+
+        return redirect('buku')->with('success', 'Berhasil menghapus data');
+    }
+
+    protected function validateBuku(?Buku $buku = null): array
+    {
+        $buku ??= new Buku();
+
+        return request()->validate(
+            [
+                'judul' => ['required'],
+                'jenis' => ['required'],
+                'penulis' => ['required']
+            ],
+            [
+                'judul.required' => 'Judul tidak boleh kosong',
+                'jenis.required' => 'Jenis tidak boleh kosong',
+                'penulis.required' => 'Penulis tidak boleh kosong',
+            ]
+        );
     }
 }

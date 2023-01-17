@@ -20,9 +20,8 @@ class BukuFactory extends Factory
         return [
             'no_buku' => fake()->unique()->numberBetween(1, 100),
             'judul' => fake()->title(),
-            'jenis' => fake()->randomElement(['skripsi', 'pendidikan']),
+            'jenis' => fake()->randomElement(['buku bacaan', 'skripsi']),
             'penulis' => fake()->name(),
-            'status' => fake()->randomElement(['tersedia', 'dipinjam', 'hilang'])
         ];
     }
 }

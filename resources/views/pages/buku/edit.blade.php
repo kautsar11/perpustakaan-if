@@ -3,17 +3,18 @@
         <div class="w-50 mx-auto">
             <div class="card recent-sales overflow-auto">
                 <div class="card-body p-5">
-                    <form action="{{ route('buku.tambah.simpan') }}" method="POST">
+                    <form action="{{ route('buku.edit.simpan',$buku->no_buku) }}" method="POST">
                         @csrf
+                        @method('PATCH')
                         <div class="mb-3">
-                            <x-form.input name="judul" type="text" />
+                            <x-form.input name="judul" type="text" :value="$buku->judul"/>
                         </div>
                         <div class="mb-3">
-                              <x-form.select class="w-50" name="jenis" :nilai="['buku bacaan', 'skripsi']"/>
+                              <x-form.select class="w-50" name="jenis" :nilai="['buku bacaan', 'skripsi']" :data="$buku->jenis"/>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="mb-3">
-                                <x-form.input name="penulis" type="text" />
+                                <x-form.input name="penulis" type="text" :value="$buku->penulis"/>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">

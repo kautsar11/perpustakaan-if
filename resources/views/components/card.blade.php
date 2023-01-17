@@ -12,11 +12,13 @@
                 </h5>
 
                 <div class="d-flex justify-content-between gap-3">
+                    @if (!(request()->is('/') || request()->is('buku')))
                     <!-- cetak -->
                     <button class="btn btn-primary btn-sm h-75">
                         <i class="bi bi-printer-fill"></i>
                         Cetak
                     </button>
+                    @endif
 
                     <!-- search -->
                     {{ $search }}

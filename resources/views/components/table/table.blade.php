@@ -1,6 +1,6 @@
 @props(['headers'])
 
-<table class="table table-borderless datatable">
+<table class="table table-striped datatable">
     <thead>
         <tr>
          @foreach ($headers as $header)

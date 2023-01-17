@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Buku;
 use App\Models\Petugas;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,25 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        Petugas::factory()->create([
+        DB::table('petugas')->insert([
             'nim' => '10120155',
             'nama' => 'test',
             'password' => bcrypt('10120155'),
             'role' => 'admin'
         ]);
-        Petugas::factory()->create([
-            'nim' => '10120156',
-            'nama' => 'test',
-            'password' => bcrypt('10120156'),
-            'role' => 'petugas'
-        ]);
+
 
         Buku::factory(50)->create();
     }

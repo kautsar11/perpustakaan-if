@@ -30,8 +30,11 @@ class Petugas extends Authenticatable
 
     public function scopeSearch(Builder $query, $search)
     {
-        // $query->where('nim', 'like', '%' . $search . "%");
-        $query->when(request()->is('/'), fn () => $query
-            ->where('nim', 'like', '%' . $search . '%'));
+        $query->when(
+            request()->is('/'),
+            fn () => $query
+                ->where('nim', 'like', '%' . $search . '%')
+                ->orWhere('nama', 'like', '%' . $search . '%')
+        );
     }
 }

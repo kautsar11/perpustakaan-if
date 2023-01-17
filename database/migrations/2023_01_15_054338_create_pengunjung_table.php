@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('pengunjung', function (Blueprint $table) {
             $table->id();
-            $table->string('nim_petugas', 10);
-            $table->string('nim', 10);
-            $table->string('nama', 50);
+            $table->string('nim_petugas', 8);
+            $table->string('nim', 8);
+            $table->string('nama');
             $table->string('kelas', 6);
             $table->string('angkatan', 4);
             $table->string('nomor_telepon', 20);

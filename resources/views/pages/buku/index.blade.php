@@ -11,26 +11,39 @@
 
                 {{-- search --}}
                 <x-slot name="search">
-                    <x-search action="#" placeholder="Cari petugas..." />
+                    <x-search action="buku" placeholder="Cari buku..." />
                 </x-slot>
 
                 {{-- table --}}
                 <x-slot name="table">
-                    <x-table.table :headers="['No Buku', 'Judul', 'Jenis', 'Penulis','Status','']">
-                        <tr>
-                            <td scope="row"><a href="#">#2457</a></td>
-                            <td>Brandon Jacob</td>
-                            <td>Brandon Jacob</td>
-                            <td>Brandon Jacob</td>
-                            <td>
-                                <span class="badge bg-success">Approved</span>
-                            </td>
-                            <td>
-                                <x-button-link class="btn-success" href="#">Edit</x-button-link>
-                                <x-button-link class="btn-danger" href="#">Delete</x-button-link>
-                            </td>
-                        </tr>
-                    </x-table.table>
+                    @if ($buku->count())
+                        <x-table.table :headers="['No', 'No Buku', 'Judul', 'Penulis', 'Jenis', '']">
+                            @foreach ($buku as $b)
+                                <tr>
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td>{{ $b->no_buku }}</td>
+                                    <td>{{ $b->judul }}</td>
+                                    <td>{{ $b->penulis }}</td>
+                                    <td>{{ $b->jenis }}</td>
+                                    <td class="d-flex gap-3">
+                                        <x-button-link class="btn-success" href="{{ route('buku.edit', $b->no_buku) }}">
+                                            Edit</x-button-link>
+
+                                        <form action="{{ route('buku.hapus', $b->no_buku) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-form.submit-button class="btn-danger btn-sm">
+                                                Hapus
+                                            </x-form.submit-button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </x-table.table>
+                    @else
+                        <p class="text-center">Tidak ada data</p>
+                    @endif
+                    {{ $buku->links() }}
                 </x-slot>
             </x-card>
         </section>

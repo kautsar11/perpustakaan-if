@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,4 +18,16 @@ class Buku extends Model
     protected $keyType = 'string';
 
     protected $guarded = [];
+
+    public function scopeSearch(Builder $query, $search)
+    {
+        $query->when(
+            request()->is('buku'),
+            fn () => $query
+                ->where('judul', 'like', '%' . $search . '%')
+                ->orWhere('jenis', 'like', '%' . $search . '%')
+                ->orWhere('penulis', 'like', '%' . $search . '%')
+                ->orWhere('no_buku', 'like', '%' . $search . '%')
+        );
+    }
 }

@@ -11,7 +11,7 @@
 
                 {{-- search --}}
                 <x-slot name="search">
-                    <x-search action="#" placeholder="Cari petugas..." />
+                    <x-search action="/" placeholder="Cari petugas..." />
                 </x-slot>
 
                 {{-- table --}}
@@ -23,14 +23,14 @@
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $p->nim }}</td>
                                     <td>{{ $p->nama }}</td>
-                                    <td class="d-flex">
+                                    <td class="d-flex gap-3">
                                         <x-button-link class="btn-success" href="{{ route('petugas.edit', $p->nim) }}">
                                             Edit</x-button-link>
 
                                         <form action="{{ route('petugas.hapus', $p->nim) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <x-form.submit-button class="btn-danger btn-sm">Delete
+                                            <x-form.submit-button class="btn-danger btn-sm">Hapus
                                             </x-form.submit-button>
                                         </form>
                                     </td>

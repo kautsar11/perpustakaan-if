@@ -6,8 +6,8 @@
                     <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
                         <div class="d-flex justify-content-center py-4">
                             <a href="/" class="logo d-flex align-items-center w-auto">
+                                <span class="d-none d-lg-block fs-5">Selamat datang di Perpus IF UNIKOM</span>
                                 <img src="assets/img/logo.png" alt="" />
-                                <span class="d-none d-lg-block">Perpustakaan IF</span>
                             </a>
                         </div>
                         <!-- End Logo -->

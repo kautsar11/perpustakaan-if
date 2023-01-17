@@ -17,8 +17,8 @@
                     <x-form.input name="password" type="text" :value="old('password')"/>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <x-button-link class="btn-danger" href="/">Back</x-button-link>
-                    <x-form.submit-button class="btn-success">Submit</x-form.submit-button>
+                    <x-button-link class="btn-danger" href="/">Kembali</x-button-link>
+                    <x-form.submit-button class="btn-success">Simpan</x-form.submit-button>
                 </div>
               </form>
             </div>

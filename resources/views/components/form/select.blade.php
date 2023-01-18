@@ -1,4 +1,4 @@
-@props(['name', 'nilai','data'])
+@props(['name', 'nilai','data'=> null])
 <x-form.label name="{{ str_replace('_', ' ', $name) }}" />
 <select name="{{ $name }}" {{ $attributes->merge(['class' => 'form-select']) }}>
     <option selected>Pilih!</option>

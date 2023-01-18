@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Buku;
+use App\Models\Pengunjung;
 use App\Models\Petugas;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
 
 
         Buku::factory(50)->create();
+        Pengunjung::factory(50)->create();
     }
 }

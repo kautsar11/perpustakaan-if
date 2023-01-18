@@ -6,14 +6,16 @@
                     <form action="{{ route('buku.tambah.simpan') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <x-form.input name="judul" type="text" />
-                        </div>
-                        <div class="mb-3">
-                              <x-form.select class="w-50" name="jenis" :nilai="['buku bacaan', 'skripsi']"/>
+                            <x-form.input name="judul" type="text" :value="old('judul')"/>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="mb-3">
-                                <x-form.input name="penulis" type="text" />
+                                <x-form.select name="jenis" :nilai="['buku bacaan', 'skripsi']" />
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="mb-3">
+                                <x-form.input name="penulis" type="text" :value="old('penulis')"/>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">

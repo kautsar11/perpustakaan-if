@@ -9,10 +9,10 @@
                 
                 <div class="d-flex justify-content-between">
                   <div class="mb-3">
-                    <x-form.input name="nim" type="text" :value="$petugas->nim"/>
+                    <x-form.input name="nim" type="text" :value="old('nim',$petugas->nim)"/>
                 </div>
                 <div class="mb-3">
-                      <x-form.input name="nama" type="text" :value="$petugas->nama"/>
+                      <x-form.input name="nama" type="text" :value="old('nama',$petugas->nama)"/>
                     </div>
                 </div>
                 <div class="mb-3">

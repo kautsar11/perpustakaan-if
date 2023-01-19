@@ -23,7 +23,7 @@ class Buku extends Model
     {
         $query->when(
             request()->is('buku'),
-            fn () => $query
+            fn ($query) => $query
                 ->where('judul', 'like', '%' . $search . '%')
                 ->orWhere('jenis', 'like', '%' . $search . '%')
                 ->orWhere('penulis', 'like', '%' . $search . '%')

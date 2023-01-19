@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BukuController extends Controller
 {
@@ -54,12 +55,13 @@ class BukuController extends Controller
         return request()->validate(
             [
                 'judul' => ['required'],
-                'jenis' => ['required'],
+                'jenis' => ['required', Rule::exists('buku', 'jenis')],
                 'penulis' => ['required']
             ],
             [
                 'judul.required' => 'Judul tidak boleh kosong',
                 'jenis.required' => 'Jenis tidak boleh kosong',
+                'jenis.exists' => 'Jenis tidak ditemukan',
                 'penulis.required' => 'Penulis tidak boleh kosong',
             ]
         );

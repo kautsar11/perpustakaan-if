@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id('no_peminjaman');
             $table->unsignedBigInteger('no_buku');
             $table->string('nim_petugas_pinjam', 8);
-            $table->string('nim_petugas_kembali', 8);
+            $table->string('nim_petugas_kembali', 8)->nullable();
             $table->foreignId('id_pengunjung')->constrained('pengunjung');
             $table->date('tgl_pinjam');
-            $table->date('tgl_kembali');
+            $table->date('tgl_kembali')->nullable();
             $table->enum('status', ['dipinjam', 'dikembalikan', 'hilang']);
             $table->foreign('nim_petugas_pinjam')->references('nim')->on('petugas');
             $table->foreign('nim_petugas_kembali')->references('nim')->on('petugas');

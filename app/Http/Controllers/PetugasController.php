@@ -26,7 +26,9 @@ class PetugasController extends Controller
 
     public function store()
     {
-        $attributes = $this->validatePetugas();
+        $attributes = array_merge($this->validatePetugas(), [
+            'role' => 'petugas'
+        ]);
 
         Petugas::query()->create($attributes);
 

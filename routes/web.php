@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\PetugasController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-    Route::group(['controller' => PetugasController::class], function () {
+    Route::group(['controller' => PetugasController::class, 'middleware' => 'admin'], function () {
         Route::get('/', 'index')->name('home');
         Route::prefix('petugas')->group(function () {
             Route::get('tambah', 'create')->name('petugas.tambah');
@@ -37,6 +38,17 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{pengunjung}', 'edit')->name('pengunjung.edit');
             Route::patch('edit/{pengunjung}', 'update')->name('pengunjung.edit.simpan');
             Route::delete('hapus/{pengunjung}', 'destroy')->name('pengunjung.hapus');
+        });
+    });
+
+    Route::group(['controller' => PeminjamanController::class], function () {
+        Route::prefix('peminjaman')->group(function () {
+            Route::get('/', 'index');
+            Route::get('tambah', 'create')->name('peminjaman.tambah');
+            Route::post('tambah', 'store')->name('peminjaman.tambah.simpan');
+            Route::get('edit/{peminjaman}', 'edit')->name('peminjaman.edit');
+            Route::patch('edit/{peminjaman}', 'update')->name('peminjaman.edit.simpan');
+            Route::delete('hapus/{peminjaman}', 'destroy')->name('peminjaman.hapus');
         });
     });
 });

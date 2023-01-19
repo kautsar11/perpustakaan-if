@@ -25,10 +25,16 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <x-sidebar-link class="{{ request()->is('/') ? 'text-primary' : 'text-secondary'}}" name="petugas" icon="bi-person" link="/"/>
-            <x-sidebar-link class="{{ request()->is('buku') ? 'text-primary' : 'text-secondary'}}" name="buku" icon="bi-book" link="buku"/>
-            <x-sidebar-link class="{{ request()->is('pengunjung') ? 'text-primary' : 'text-secondary'}}" name="pengunjung" icon="bi-people" link="pengunjung"/>
-            <x-sidebar-link class="{{ request()->is('peminjaman') ? 'text-primary' : 'text-secondary'}}" name="peminjaman" icon="bi-archive" link="peminjaman"/>
+            @roles(auth()->user()->role)
+                <x-sidebar-link class="{{ request()->is('/') ? 'text-primary' : 'text-secondary' }}" name="petugas"
+                icon="bi-person" link="/" />
+            @endroles
+            <x-sidebar-link class="{{ request()->is('buku') ? 'text-primary' : 'text-secondary' }}" name="buku"
+                icon="bi-book" link="buku" />
+            <x-sidebar-link class="{{ request()->is('pengunjung') ? 'text-primary' : 'text-secondary' }}"
+                name="pengunjung" icon="bi-people" link="pengunjung" />
+            <x-sidebar-link class="{{ request()->is('peminjaman') ? 'text-primary' : 'text-secondary' }}"
+                name="peminjaman" icon="bi-archive" link="peminjaman" />
         </li>
         <!-- End Dashboard Nav -->
     </ul>

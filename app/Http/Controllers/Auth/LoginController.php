@@ -35,7 +35,11 @@ class LoginController extends Controller
 
         session()->regenerate();
 
-        return redirect('/')->with('success', 'Selamat datang');
+        if (auth()->user()->role === 'admin') {
+            return redirect('/')->with('success', 'Selamat datang');
+        } else {
+            return redirect('buku')->with('success', 'Selamat datang');
+        }
     }
 
     public function destroy()

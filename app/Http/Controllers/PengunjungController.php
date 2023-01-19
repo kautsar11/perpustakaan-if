@@ -37,7 +37,7 @@ class PengunjungController extends Controller
 
         Pengunjung::query()->create($attributes);
 
-        return redirect('buku')->with('success', 'Berhasil menyimpan data');
+        return redirect('pengunjung')->with('success', 'Berhasil menyimpan data');
     }
 
     public function edit(Pengunjung $pengunjung)

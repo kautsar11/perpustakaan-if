@@ -9,6 +9,32 @@
         <section class="section">
             <x-card :title="$title" tambah_data="{{ route('pengunjung.tambah') }}">
 
+                {{-- filter search --}}
+                <x-slot name="filterSearch">
+                    <form action="pengunjung" method="get">
+                        @if (request('search'))
+                            <input type="hidden" name="search" value="{{ request('search') }}">
+                        @endif
+
+                        @if (request('sampai'))
+                            <input type="hidden" name="sampai" value="{{ request('sampai') }}">
+                        @endif
+
+                        <x-form.input name='dari' type='date' onchange="this.form.submit()" />
+                    </form>
+                    <form action="pengunjung" method="get">
+                        @if (request('search'))
+                            <input type="hidden" name="search" value="{{ request('search') }}">
+                        @endif
+
+                        @if (request('dari'))
+                            <input type="hidden" name="dari" value="{{ request('dari') }}">
+                        @endif
+
+                        <x-form.input name='sampai' type='date' onchange="this.form.submit()" />
+                    </form>
+                </x-slot>
+
                 {{-- search --}}
                 <x-slot name="search">
                     <x-search action="pengunjung" placeholder="Cari pengunjung..." />
@@ -37,9 +63,10 @@
                                     <td>{{ $p->kelas }}</td>
                                     <td>{{ $p->angkatan }}</td>
                                     <td>{{ $p->nomor_telepon }}</td>
-                                    <td>{{  date('d-m-Y',strtotime($p->tgl_kunjungan)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($p->tgl_kunjungan)) }}</td>
                                     <td class="d-flex gap-3">
-                                        <x-button-link class="btn-success" href="{{ route('pengunjung.edit', $p->id) }}">
+                                        <x-button-link class="btn-success"
+                                            href="{{ route('pengunjung.edit', $p->id) }}">
                                             Edit</x-button-link>
 
                                         <form action="{{ route('pengunjung.hapus', $p->id) }}" method="post">

@@ -11,7 +11,13 @@ class PengunjungController extends Controller
     {
         return view(
             'pages.pengunjung.index',
-            ['pengunjung' => Pengunjung::query()->search(request('search'))->orderBy('id', 'asc')->paginate(5)]
+            [
+                'pengunjung' => Pengunjung::query()
+                    ->dariTgl(request('dari'))
+                    ->sampaiTgl(request('sampai'))
+                    ->search(request('search'))
+                    ->orderBy('id', 'asc')->paginate(5)
+            ]
         );
     }
 

@@ -11,6 +11,9 @@
                     </span>
                 </h5>
 
+                {{-- fiter search --}}
+                {{ $filterSearch ?? null }}
+
                 <div class="d-flex justify-content-between gap-3">
                     @if (!(request()->is('/') || request()->is('buku')))
                     <!-- cetak -->

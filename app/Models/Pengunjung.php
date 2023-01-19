@@ -29,4 +29,14 @@ class Pengunjung extends Model
                 ->orWhere('id', 'like', '%' . $search . '%')
         );
     }
+
+    public function scopeDariTgl(Builder $query, $tgl)
+    {
+        $query->when($tgl ?? false, fn () => $query->where('tgl_kunjungan', '>=', $tgl));
+    }
+
+    public function scopeSampaiTgl(Builder $query, $tgl)
+    {
+        $query->when($tgl ?? false, fn () => $query->where('tgl_kunjungan', '<=', $tgl));
+    }
 }

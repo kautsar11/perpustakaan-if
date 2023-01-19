@@ -55,7 +55,9 @@ Route::middleware('auth')->group(function () {
 
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('login', 'index')->name('login');
-    Route::post('login', 'store');
-    Route::post('logout', 'destroy');
+    Route::middleware('guest')->group(function () {
+        Route::get('login', 'index')->name('login');
+        Route::post('login', 'store');
+    });
+    Route::post('logout', 'destroy')->middleware('auth');
 });

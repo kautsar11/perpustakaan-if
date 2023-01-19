@@ -16,7 +16,7 @@ class PengunjungController extends Controller
                     ->dariTgl(request('dari'))
                     ->sampaiTgl(request('sampai'))
                     ->search(request('search'))
-                    ->orderBy('id', 'asc')->paginate(5)
+                    ->oldest('id')->paginate(5)
             ]
         );
     }

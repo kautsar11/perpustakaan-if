@@ -10,7 +10,7 @@ class BukuController extends Controller
 {
     public function index()
     {
-        return view('pages.buku.index', ['buku' => Buku::query()->search(request('search'))->orderBy('no_buku', 'asc')->paginate(5)]);
+        return view('pages.buku.index', ['buku' => Buku::query()->search(request('search'))->oldest('no_buku')->paginate(5)]);
     }
 
     public function create()

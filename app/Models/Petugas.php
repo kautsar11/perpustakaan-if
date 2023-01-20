@@ -19,7 +19,7 @@ class Petugas extends Authenticatable
     protected $table = 'petugas';
     protected $primaryKey = 'nim';
     protected $keyType = 'string';
-    protected $guarded = [];
+    protected $fillable  = ['nim', 'nama', 'role', 'password'];
 
     protected function password(): Attribute
     {

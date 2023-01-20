@@ -20,7 +20,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <x-button-link class="btn-danger" href="/">Back</x-button-link>
-                    <x-form.submit-button class="btn-success">Submit</x-form.submit-button>
+                    <x-form.submit-button class="btn-success show_confirm_save">Submit</x-form.submit-button>
                 </div>
               </form>
             </div>

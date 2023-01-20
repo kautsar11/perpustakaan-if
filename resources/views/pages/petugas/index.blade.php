@@ -30,7 +30,7 @@
                                         <form action="{{ route('petugas.hapus', $p->nim) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <x-form.submit-button class="btn-danger btn-sm">Hapus
+                                            <x-form.submit-button class="btn-danger btn-sm show_confirm_delete">Hapus
                                             </x-form.submit-button>
                                         </form>
                                     </td>

@@ -37,7 +37,7 @@ class PeminjamanController extends Controller
 
         Peminjaman::query()->create($attributes);
 
-        return redirect('peminjaman')->with('success', 'Berhasil menyimpan data');
+        return redirect('peminjaman')->with('success', 'Data berhasil disimpan');
     }
 
     public function edit(Peminjaman $peminjaman)
@@ -56,14 +56,14 @@ class PeminjamanController extends Controller
 
         $peminjaman->update($attributes);
 
-        return redirect('peminjaman')->with('success', 'Berhasil mengubah data');
+        return redirect('peminjaman')->with('success', 'Data berhasil diedit');
     }
 
     public function destroy(Peminjaman $peminjaman)
     {
         $peminjaman->delete();
 
-        return redirect('peminjaman')->with('success', 'Berhasil menghapus data');
+        return redirect('peminjaman')->with('success', 'Data terhapus');
     }
 
     protected function validatePeminjaman(?Peminjaman $peminjaman = null): array

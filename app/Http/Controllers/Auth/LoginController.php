@@ -28,17 +28,15 @@ class LoginController extends Controller
         );
 
         if (!auth()->attempt($credentials)) {
-            throw ValidationException::withMessages(
-                ['nim' => 'Data yang anda masukkan tidak sesuai']
-            );
+            return back()->with('warning', 'Gagal login silahkan cek kembali Nim / Nama anda');
         }
 
         session()->regenerate();
 
-        if (auth()->user()->role === 'admin') {
-            return redirect('/')->with('success', 'Selamat datang');
+        if (auth()->user()?->role === 'admin') {
+            return redirect('/')->with('success', 'Anda berhasil login');
         } else {
-            return redirect('buku')->with('success', 'Selamat datang');
+            return redirect('buku')->with('success', 'Anda berhasil login');
         }
     }
 

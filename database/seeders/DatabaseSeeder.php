@@ -22,9 +22,16 @@ class DatabaseSeeder extends Seeder
 
         DB::table('petugas')->insert([
             'nim' => '10120155',
-            'nama' => 'test',
+            'nama' => 'kautsar',
             'password' => bcrypt('10120155'),
             'role' => 'admin'
+        ]);
+
+        DB::table('petugas')->insert([
+            'nim' => '10120156',
+            'nama' => 'ihsan',
+            'password' => bcrypt('10120156'),
+            'role' => 'petugas'
         ]);
 
 

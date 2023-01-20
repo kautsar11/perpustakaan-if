@@ -32,7 +32,7 @@ class PetugasController extends Controller
 
         Petugas::query()->create($attributes);
 
-        return redirect('/')->with('success', 'Berhasil menyimpan data');
+        return redirect('/')->with('success', 'Data berhasil disimpan');
     }
 
     public function edit(Petugas $petugas)
@@ -46,14 +46,14 @@ class PetugasController extends Controller
 
         $petugas->update($attributes);
 
-        return redirect('/')->with('success', 'Berhasil mengubah data');
+        return redirect('/')->with('success', 'Data berhasil diedit');
     }
 
     public function destroy(Petugas $petugas)
     {
         $petugas->delete();
 
-        return redirect('/')->with('success', 'Berhasil menghapus data');
+        return redirect('/')->with('success', 'Data terhapus');
     }
 
     protected function validatePetugas(?Petugas $petugas = null): array

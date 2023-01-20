@@ -24,7 +24,7 @@ class BukuController extends Controller
 
         Buku::query()->create($attributes);
 
-        return redirect('buku')->with('success', 'Berhasil menyimpan data');
+        return redirect('buku')->with('success', 'Data berhasil disimpan');
     }
 
     public function edit(Buku $buku)
@@ -38,14 +38,14 @@ class BukuController extends Controller
 
         $buku->update($attributes);
 
-        return redirect('buku')->with('success', 'Berhasil mengubah data');
+        return redirect('buku')->with('success', 'Data berhasil diedit');
     }
 
     public function destroy(Buku $buku)
     {
         $buku->delete();
 
-        return redirect('buku')->with('success', 'Berhasil menghapus data');
+        return redirect('buku')->with('success', 'Data terhapus');
     }
 
     protected function validateBuku(?Buku $buku = null): array

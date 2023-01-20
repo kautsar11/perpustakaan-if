@@ -26,7 +26,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <x-button-link class="btn-danger" href="/pengunjung">Kembali</x-button-link>
-                            <x-form.submit-button class="btn-success">Simpan</x-form.submit-button>
+                            <x-form.submit-button class="btn-success show_confirm_save">Simpan</x-form.submit-button>
                         </div>
                     </form>
                 </div>

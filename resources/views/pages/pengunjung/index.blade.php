@@ -20,7 +20,7 @@
                             <input type="hidden" name="sampai" value="{{ request('sampai') }}">
                         @endif
 
-                        <x-form.input name='dari' type='date' :value="request('dari')" onchange="this.form.submit()" />
+                        <x-form.input name='dari' type='date' :value="request('dari')" onfocus="this.value=''" onblur="this.value='{{ request('dari') }}'" onchange="this.form.submit()" />
                     </form>
                     <form action="pengunjung" method="get">
                         @if (request('search'))
@@ -31,7 +31,7 @@
                             <input type="hidden" name="dari" value="{{ request('dari') }}">
                         @endif
 
-                        <x-form.input name='sampai' type='date' :value="request('sampai')" onchange="this.form.submit()" />
+                        <x-form.input name='sampai' type='date' :value="request('sampai')" onfocus="this.value=''" onblur="this.value='{{ request('sampai') }}'" onchange="this.form.submit()" />
                     </form>
                 </x-slot>
 
@@ -72,7 +72,7 @@
                                         <form action="{{ route('pengunjung.hapus', $p->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <x-form.submit-button class="btn-danger btn-sm">
+                                            <x-form.submit-button class="btn-danger btn-sm show_confirm_delete">
                                                 Hapus
                                             </x-form.submit-button>
                                         </form>

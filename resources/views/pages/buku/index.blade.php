@@ -32,7 +32,7 @@
                                         <form action="{{ route('buku.hapus', $b->no_buku) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <x-form.submit-button class="btn-danger btn-sm">
+                                            <x-form.submit-button class="btn-danger btn-sm show_confirm_delete">
                                                 Hapus
                                             </x-form.submit-button>
                                         </form>
@@ -50,5 +50,5 @@
     </main>
     <!-- End #main -->
 
-    @include('components.template.footer')l
+    @include('components.template.footer')
 </x-layouts.base>

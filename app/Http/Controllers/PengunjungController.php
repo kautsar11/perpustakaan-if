@@ -37,7 +37,7 @@ class PengunjungController extends Controller
 
         Pengunjung::query()->create($attributes);
 
-        return redirect('pengunjung')->with('success', 'Berhasil menyimpan data');
+        return redirect('pengunjung')->with('success', 'Data berhasil disimpan');
     }
 
     public function edit(Pengunjung $pengunjung)
@@ -56,14 +56,14 @@ class PengunjungController extends Controller
 
         $pengunjung->update($attributes);
 
-        return redirect('pengunjung')->with('success', 'Berhasil mengubah data');
+        return redirect('pengunjung')->with('success', 'Data berhasil diedit');
     }
 
     public function destroy(Pengunjung $pengunjung)
     {
         $pengunjung->delete();
 
-        return redirect('pengunjung')->with('success', 'Berhasil menghapus data');
+        return redirect('pengunjung')->with('success', 'Data terhapus');
     }
 
     protected function validatePengunjung(?Pengunjung $pengunjung = null): array

@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{pengunjung}', 'edit')->name('pengunjung.edit');
             Route::patch('edit/{pengunjung}', 'update')->name('pengunjung.edit.simpan');
             Route::delete('hapus/{pengunjung}', 'destroy')->name('pengunjung.hapus');
+            Route::get('export', 'export')->name('pengunjung.export');
         });
     });
 

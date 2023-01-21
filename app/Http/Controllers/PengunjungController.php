@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PengunjungExport;
 use App\Models\Pengunjung;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengunjungController extends Controller
 {
@@ -90,5 +92,11 @@ class PengunjungController extends Controller
                 'tgl_kunjungan.required' => 'Tanggal kunjungan tidak boleh kosong',
             ]
         );
+    }
+
+    // untuk export excel
+    public function export()
+    {
+        return Excel::download(new PengunjungExport, 'pengunjung.xlsx');
     }
 }

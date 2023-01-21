@@ -19,7 +19,7 @@ class Pengunjung extends Model
     public function scopeSearch(Builder $query, $search)
     {
         $query->when(
-            request()->is('pengunjung'),
+            request()->is('pengunjung') || request()->is('pengunjung/export'),
             fn () => $query
                 ->where('nim', 'like', '%' . $search . '%')
                 ->orWhere('kelas', 'like', '%' . $search . '%')

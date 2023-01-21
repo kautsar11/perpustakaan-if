@@ -7,7 +7,7 @@
 
     <main id="main" class="main">
         <section class="section">
-            <x-card :title="$title" tambah_data="{{ route('pengunjung.tambah') }}">
+            <x-card excelRoute="pengunjung.export" :title="$title" tambah_data="{{ route('pengunjung.tambah') }}">
 
                 {{-- filter search --}}
                 <x-slot name="filterSearch">

@@ -2,6 +2,7 @@
     <main class="container my-auto">
         <div class="w-50 mx-auto">
           <div class="card recent-sales overflow-auto">
+            <h1 class="text-center">Tambah Petugas</h1>
             <div class="card-body p-5">
               <form action="{{ route('petugas.tambah.simpan') }}" method="POST">
                 @csrf

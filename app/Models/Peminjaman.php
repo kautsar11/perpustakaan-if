@@ -21,12 +21,22 @@ class Peminjaman extends Model
         $query->when(
             request()->is('peminjaman'),
             fn () => $query
-                ->where('nim', 'like', '%' . $search . '%')
-                ->orWhere('kelas', 'like', '%' . $search . '%')
-                ->orWhere('nama', 'like', '%' . $search . '%')
-                ->orWhere('angkatan', 'like', '%' . $search . '%')
-                ->orWhere('nomor_telepon', 'like', '%' . $search . '%')
-                ->orWhere('id', 'like', '%' . $search . '%')
+                ->where('no_peminjaman', 'like', '%' . $search . '%')
         );
+    }
+
+    public function petugas()
+    {
+        return $this->belongsTo(Petugas::class, 'nim_petugas_pinjam', 'nim');
+    }
+
+    public function pengunjung()
+    {
+        return $this->belongsTo(Pengunjung::class, 'id_pengunjung', 'id');
+    }
+
+    public function buku()
+    {
+        return $this->belongsTo(Buku::class, 'no_buku', 'no_buku');
     }
 }

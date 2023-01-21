@@ -37,4 +37,14 @@ class Petugas extends Authenticatable
                 ->orWhere('nama', 'like', '%' . $search . '%')
         );
     }
+
+    public function pengunjung()
+    {
+        return $this->hasMany(Pengunjung::class, 'nim_petugas', 'nim');
+    }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'nim_petugas_pinjam', 'nim');
+    }
 }

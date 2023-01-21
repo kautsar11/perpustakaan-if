@@ -2,6 +2,7 @@
     <main class="container my-auto">
         <div class="w-50 mx-auto">
             <div class="card recent-sales overflow-auto">
+                <h1 class="text-center">Ubah Pengunjung</h1>
                 <div class="card-body p-5">
                     <form action="{{ route('pengunjung.edit.simpan',$pengunjung->id) }}" method="POST">
                         @csrf

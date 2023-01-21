@@ -13,8 +13,6 @@ class PeminjamanController extends Controller
             'pages.peminjaman.index',
             [
                 'peminjaman' => Peminjaman::query()
-                    ->dariTgl(request('dari'))
-                    ->sampaiTgl(request('sampai'))
                     ->search(request('search'))
                     ->orderBy('no_peminjaman', 'asc')->paginate(5)
             ]

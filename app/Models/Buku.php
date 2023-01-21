@@ -30,4 +30,9 @@ class Buku extends Model
                 ->orWhere('no_buku', 'like', '%' . $search . '%')
         );
     }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'no_buku', 'no_buku');
+    }
 }

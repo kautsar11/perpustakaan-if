@@ -39,4 +39,14 @@ class Pengunjung extends Model
     {
         $query->when($tgl ?? false, fn () => $query->where('tgl_kunjungan', '<=', $tgl));
     }
+
+    public function petugas()
+    {
+        return $this->belongsTo(Petugas::class, 'nim_petugas', 'nim');
+    }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'id_pengunjung', 'id');
+    }
 }

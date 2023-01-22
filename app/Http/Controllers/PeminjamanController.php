@@ -83,7 +83,7 @@ class PeminjamanController extends Controller
             'keterangan' => []
         ]);
 
-        $attributes['nim_petugas_kembali'] = auth()->id();
+        $attributes['nama_petugas_kembali'] = auth()->user()->nama;
 
         $peminjaman->update($attributes);
 

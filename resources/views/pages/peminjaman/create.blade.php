@@ -20,7 +20,7 @@
 
                                 @foreach ($buku as $b)
                                     <option value="{{ $b->no_buku }}">
-                                        {{ $b->judul }}
+                                        {{ $b->no_buku }}-{{ $b->judul }}
                                     </option>
                                 @endforeach
                             </select>

@@ -11,7 +11,7 @@
                             <x-form.input name="tgl_kembali" type="date" :value="old('tgl_kembali',$peminjaman->tgl_kembali)" />
                         </div>
                         <div class="mb-3">
-                            <x-form.select name="status" :nilai="['dikembalikan', 'hilang']" :data="$peminjaman->status"/>
+                            <x-form.select name="status" :nilai="['dipinjam','dikembalikan', 'hilang']" :data="$peminjaman->status"/>
                         </div>
                         <div class="mb-3">
                             <x-form.label name="keterangan" />

@@ -95,9 +95,9 @@
                                     <td>{{ $p->nama_peminjam }}</td>
                                     <td>{{ $p->buku->judul }}</td>
                                     <td>{{ date('d-m-Y', strtotime($p->tgl_pinjam)) }}</td>
-                                    <td>{{ $p->nim_petugas_pinjam }}</td>
+                                    <td>{{ $p->petugas->nama }}</td>
                                     <td>{{ $p->tgl_kembali ? date('d-m-Y', strtotime($p->tgl_kembali)) : '' }}</td>
-                                    <td>{{ $p->nim_petugas_kembali }}</td>
+                                    <td>{{ $p->nama_petugas_kembali }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td>
                                         <div class="d-flex gap-3">

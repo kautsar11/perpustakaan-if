@@ -24,7 +24,7 @@ class Peminjaman extends Model
             fn () => $query
                 ->where('no_peminjaman', 'like', '%' . $search . '%')
                 ->orWhere('nim_petugas_pinjam', 'like', '%' . $search . '%')
-                ->orWhere('nim_petugas_kembali', 'like', '%' . $search . '%')
+                ->orWhere('nama_petugas_kembali', 'like', '%' . $search . '%')
                 ->orWhere('nim_peminjam', 'like', '%' . $search . '%')
                 ->orWhere('nama_peminjam', 'like', '%' . $search . '%')
         );

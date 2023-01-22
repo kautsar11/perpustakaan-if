@@ -21,7 +21,7 @@
 
                                 @foreach ($buku as $b)
                                     <option value="{{ $b->no_buku }}" {{ $b->no_buku === $peminjaman->no_buku ? 'selected' : '' }}>
-                                        {{ $b->judul }}
+                                        {{ $b->no_buku }}-{{ $b->judul }}
                                     </option>
                                 @endforeach
                             </select>

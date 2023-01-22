@@ -10,7 +10,7 @@
             <x-card :title="$title" tambah_data="{{ route('buku.tambah') }}">
 
                 {{-- search --}}
-                <x-slot name="search">
+                <x-slot name="searchAlign">
                     <x-search action="buku" placeholder="Cari buku..." />
                 </x-slot>
 

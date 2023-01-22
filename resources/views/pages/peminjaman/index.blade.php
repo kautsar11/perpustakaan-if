@@ -1,27 +1,51 @@
 @php
     $title = 'Peminjaman';
 @endphp
-
 <x-layouts.base :pageTitle="$title">
     @include('components.template.header')
 
     <main id="main" class="main">
         <section class="section">
-            <x-card :title="$title" tambah_data="{{ route('peminjaman.tambah') }}">
+            <x-card excelRoute="peminjaman.export" :title="$title" tambah_data="{{ route('peminjaman.tambah') }}">
 
-                {{-- filter search --}}
+                {{-- filter tanggal --}}
                 <x-slot name="filterSearch">
                     <form action="peminjaman" method="get">
                         @if (request('search'))
                             <input type="hidden" name="search" value="{{ request('search') }}">
                         @endif
 
+                        @if (request('status'))
+                            <input type="hidden" name="status" value="{{ request('status') }}">
+                        @endif
+
                         @if (request('sampai'))
                             <input type="hidden" name="sampai" value="{{ request('sampai') }}">
                         @endif
 
-                        <x-form.input name='dari' type='date' :value="request('dari')" onfocus="this.value=''" onblur="this.value='{{ request('dari') }}'" onchange="this.form.submit()" />
+                        <x-form.input name='dari' type='date' :value="request('dari')" onfocus="this.value=''"
+                            onblur="this.value='{{ request('dari') }}'" onchange="this.form.submit()" />
                     </form>
+                    <form action="peminjaman" method="get">
+                        @if (request('search'))
+                            <input type="hidden" name="search" value="{{ request('search') }}">
+                        @endif
+
+                        @if (request('status'))
+                            <input type="hidden" name="status" value="{{ request('status') }}">
+                        @endif
+
+                        @if (request('dari'))
+                            <input type="hidden" name="dari" value="{{ request('dari') }}">
+                        @endif
+
+                        <x-form.input name='sampai' type='date' :value="request('sampai')" onfocus="this.value=''"
+                            onblur="this.value='{{ request('sampai') }}'" onchange="this.form.submit()" />
+                    </form>
+                </x-slot>
+
+                {{-- finter status --}}
+                <x-slot name="filterStatus">
                     <form action="peminjaman" method="get">
                         @if (request('search'))
                             <input type="hidden" name="search" value="{{ request('search') }}">
@@ -31,13 +55,20 @@
                             <input type="hidden" name="dari" value="{{ request('dari') }}">
                         @endif
 
-                        <x-form.input name='sampai' type='date' :value="request('sampai')" onfocus="this.value=''" onblur="this.value='{{ request('sampai') }}'" onchange="this.form.submit()" />
+                        <select name="status" class="form-select h-50" style="width: 160px" aria-label="filter status" onchange="this.form.submit()">
+                                <option value="semua" {{ request('status') == 'semua' ? 'selected' : ''}}>Semua</option>
+                                <option value="dipinjam" {{ request('status') == 'dipinjam' ? 'selected' : ''}}>Dipinjam</option>
+                                <option value="dikembalikan" {{ request('status') == 'dikembalikan' ? 'selected' : ''}}>Dikembalikan</option>
+                                <option value="hilang" {{ request('status') == 'hilang' ? 'selected' : ''}}>Hilang</option>
+                        </select>
                     </form>
                 </x-slot>
 
                 {{-- search --}}
-                <x-slot name="search">
-                    <x-search action="peminjaman" placeholder="Cari peminjaman..." />
+                <x-slot name="searchTop">
+                    <div class="d-flex justify-content-end">
+                        <x-search class="mt-3" action="peminjaman" placeholder="Cari peminjaman..." />
+                    </div>
                 </x-slot>
 
                 {{-- table --}}
@@ -60,12 +91,12 @@
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $p->no_peminjaman }}</td>
-                                    <td>{{ $p->pengunjung->nim }}</td>
-                                    <td>{{ $p->pengunjung->nama }}</td>
+                                    <td>{{ $p->nim_peminjam }}</td>
+                                    <td>{{ $p->nama_peminjam }}</td>
                                     <td>{{ $p->buku->judul }}</td>
                                     <td>{{ date('d-m-Y', strtotime($p->tgl_pinjam)) }}</td>
                                     <td>{{ $p->nim_petugas_pinjam }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($p->tgl_kembali)) }}</td>
+                                    <td>{{ $p->tgl_kembali ? date('d-m-Y', strtotime($p->tgl_kembali)) : '' }}</td>
                                     <td>{{ $p->nim_petugas_kembali }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td>
@@ -73,8 +104,9 @@
                                             <x-button-link class="btn-success"
                                                 href="{{ route('peminjaman.edit', $p->no_peminjaman) }}">
                                                 Edit</x-button-link>
-    
-                                            <form action="{{ route('peminjaman.hapus', $p->no_peminjaman) }}" method="post">
+
+                                            <form action="{{ route('peminjaman.hapus', $p->no_peminjaman) }}"
+                                                method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <x-form.submit-button class="btn-danger btn-sm show_confirm_delete">
@@ -82,10 +114,9 @@
                                                 </x-form.submit-button>
                                             </form>
                                         </div>
-                                        <x-button-link class="btn-success"
-                                                {{-- href="{{ route('pengembalian.edit', $p->no_peminjaman) }}" --}}
-                                                >
-                                                Pengembalian</x-button-link>
+                                        <x-button-link class="btn-success mt-1"
+                                            href="{{ route('pengembalian', $p->no_peminjaman) }}">
+                                            Pengembalian</x-button-link>
                                     </td>
                                 </tr>
                             @endforeach

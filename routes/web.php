@@ -50,7 +50,10 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{peminjaman}', 'edit')->name('peminjaman.edit');
             Route::patch('edit/{peminjaman}', 'update')->name('peminjaman.edit.simpan');
             Route::delete('hapus/{peminjaman}', 'destroy')->name('peminjaman.hapus');
+            Route::get('export', 'export')->name('peminjaman.export');
         });
+        Route::get('pengembalian/{peminjaman}', 'pengembalian')->name('pengembalian');
+        Route::patch('pengembalian/{peminjaman}', 'updatePengembalian')->name('pengembalian.simpan');
     });
 });
 

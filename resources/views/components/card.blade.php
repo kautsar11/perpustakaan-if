@@ -3,6 +3,7 @@
 <div class="w-100">
     <div class="card recent-sales overflow-auto">
         <div class="card-body">
+            {{ $searchTop ?? null }}
             <div class="card-title d-flex justify-content-between">
                 <h5>
                     {{ $title }}
@@ -11,21 +12,23 @@
                     </span>
                 </h5>
 
-                {{-- fiter search --}}
+                {{-- filter search --}}
                 {{ $filterSearch ?? null }}
+
+                {{-- filter status --}}
+                {{ $filterStatus ?? null }}
 
                 <div class="d-flex justify-content-between gap-3">
                     @if (!(request()->is('/') || request()->is('buku')))
                         <!-- cetak excel-->
                         <a href="{{route($excelRoute).'?'. http_build_query(request()->except('page')) }}"
                             class="btn btn-primary btn-sm h-50">
-                            <i class="bi bi-printer-fill"></i>
-                            Cetak
+                            Cetak Laporan
                         </a>
                     @endif
 
                     <!-- search -->
-                    {{ $search }}
+                    {{ $searchAlign ?? null }}
                 </div>
             </div>
 

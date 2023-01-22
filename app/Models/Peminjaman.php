@@ -13,6 +13,7 @@ class Peminjaman extends Model
     public $timestamps = false;
 
     protected $table = 'peminjaman';
+    protected $primaryKey = 'no_peminjaman';
 
     protected $guarded = [];
 
@@ -22,17 +23,31 @@ class Peminjaman extends Model
             request()->is('peminjaman'),
             fn () => $query
                 ->where('no_peminjaman', 'like', '%' . $search . '%')
+                ->orWhere('nim_petugas_pinjam', 'like', '%' . $search . '%')
+                ->orWhere('nim_petugas_kembali', 'like', '%' . $search . '%')
         );
+    }
+
+    public function scopeDariTgl(Builder $query, $tgl)
+    {
+        $query->when($tgl ?? false, fn () => $query->where('tgl_pinjam', '>=', $tgl));
+    }
+
+    public function scopeSampaiTgl(Builder $query, $tgl)
+    {
+        $query->when($tgl ?? false, fn () => $query->where('tgl_pinjam', '<=', $tgl));
+    }
+
+    public function scopeStatus(Builder $query, $status)
+    {
+        if ($status != 'semua') {
+            $query->when($status ?? false, fn () => $query->where('status', $status));
+        }
     }
 
     public function petugas()
     {
         return $this->belongsTo(Petugas::class, 'nim_petugas_pinjam', 'nim');
-    }
-
-    public function pengunjung()
-    {
-        return $this->belongsTo(Pengunjung::class, 'id_pengunjung', 'id');
     }
 
     public function buku()

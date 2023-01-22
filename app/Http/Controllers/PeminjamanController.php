@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PeminjamanExport;
+use App\Models\Buku;
 use App\Models\Peminjaman;
-use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PeminjamanController extends Controller
 {
@@ -12,16 +14,20 @@ class PeminjamanController extends Controller
         return view(
             'pages.peminjaman.index',
             [
-                'peminjaman' => Peminjaman::query()
-                    ->search(request('search'))
-                    ->orderBy('no_peminjaman', 'asc')->paginate(5)
+                'peminjaman' => Peminjaman::query()->with('buku', 'petugas')
+                    ->dariTgl(request('dari'))
+                    ->sampaiTgl(request('sampai'))
+                    ->status(request('status'))
+                    ->search(request('search'))->paginate(5)
             ]
         );
     }
 
     public function create()
     {
-        return view('pages.peminjaman.create');
+        return view('pages.peminjaman.create', [
+            'buku' => Buku::query()->get(),
+        ]);
     }
 
     public function store()
@@ -29,6 +35,7 @@ class PeminjamanController extends Controller
         $attributes = array_merge(
             $this->validatePeminjaman(),
             [
+                'status' => 'dipinjam',
                 'nim_petugas_pinjam' => auth()->id()
             ]
         );
@@ -40,17 +47,14 @@ class PeminjamanController extends Controller
 
     public function edit(Peminjaman $peminjaman)
     {
-        return view('pages.peminjaman.edit', ['peminjaman' => $peminjaman]);
+        return view('pages.peminjaman.edit', [
+            'peminjaman' => $peminjaman, 'buku' => Buku::query()->get(),
+        ]);
     }
 
     public function update(Peminjaman $peminjaman)
     {
-        $attributes = array_merge(
-            $this->validatePengunjung($peminjaman),
-            [
-                'nim_petugas_kembali' => auth()->id()
-            ]
-        );
+        $attributes = $this->validatePeminjaman($peminjaman);
 
         $peminjaman->update($attributes);
 
@@ -64,22 +68,52 @@ class PeminjamanController extends Controller
         return redirect('peminjaman')->with('success', 'Data terhapus');
     }
 
+    public function pengembalian(Peminjaman $peminjaman)
+    {
+        return view('pages.pengembalian.index', [
+            'peminjaman' => $peminjaman
+        ]);
+    }
+
+    public function updatePengembalian(Peminjaman $peminjaman)
+    {
+        $attributes = request()->validate([
+            'tgl_kembali' => ['required'],
+            'status' => ['required'],
+            'keterangan' => []
+        ]);
+
+        $attributes['nim_petugas_kembali'] = auth()->id();
+
+        $peminjaman->update($attributes);
+
+        return redirect('peminjaman')->with('success', 'Data berhasil disimpan');
+    }
+
     protected function validatePeminjaman(?Peminjaman $peminjaman = null): array
     {
         $peminjaman ??= new Peminjaman();
 
         return request()->validate(
             [
-                'no_buku' => ['required', 'numeric'],
-                'id_pengunjung' => ['required'],
+                'no_buku' => [],
+                'nim_peminjam' => ['required', 'max:8'],
+                'nama_peminjam' => ['required'],
                 'tgl_pinjam' => ['required'],
-                'status' => ['required'],
             ],
             [
-                'nim.required' => 'Nim tidak boleh kosong',
-                'nim.numeric' => 'Nim harus berupa angka',
-                'tgl_kunjungan.required' => 'Tanggal kunjungan tidak boleh kosong',
+                'no_buku.exist' => 'Buku tidak terdaftar',
+                'nim_peminjam.required' => 'Nim tidak boleh kosong',
+                'nim_peminjam.required' => 'Nim tidak boleh lebih dari 8 angka',
+                'nama_peminjam.required' => 'Nama tidak boleh kosong',
+                'tgl_pinjam.required' => 'Tanggal kunjungan tidak boleh kosong',
             ]
         );
+    }
+
+    // untuk export excel
+    public function export()
+    {
+        return Excel::download(new PeminjamanExport, 'peminjaman.xlsx');
     }
 }

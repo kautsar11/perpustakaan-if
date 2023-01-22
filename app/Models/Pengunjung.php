@@ -44,9 +44,4 @@ class Pengunjung extends Model
     {
         return $this->belongsTo(Petugas::class, 'nim_petugas', 'nim');
     }
-
-    public function peminjaman()
-    {
-        return $this->hasMany(Peminjaman::class, 'id_pengunjung', 'id');
-    }
 }

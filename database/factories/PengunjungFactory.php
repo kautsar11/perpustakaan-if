@@ -17,7 +17,7 @@ class PengunjungFactory extends Factory
     public function definition()
     {
         return [
-            'nim_petugas' => '10120155',
+            'nim_petugas' => fake()->randomElement(['10120155', '10120156']),
             'nim' => fake()->randomElement(['10120155', '10120156', '10120157']),
             'nama' => fake()->name(),
             'kelas' => fake()->randomElement(

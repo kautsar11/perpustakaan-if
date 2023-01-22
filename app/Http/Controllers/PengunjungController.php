@@ -14,7 +14,7 @@ class PengunjungController extends Controller
         return view(
             'pages.pengunjung.index',
             [
-                'pengunjung' => Pengunjung::query()
+                'pengunjung' => Pengunjung::query()->with('petugas')
                     ->dariTgl(request('dari'))
                     ->sampaiTgl(request('sampai'))
                     ->search(request('search'))
@@ -74,21 +74,25 @@ class PengunjungController extends Controller
 
         return request()->validate(
             [
-                'nim' => ['required', 'numeric'],
-                'kelas' => ['required'],
+                'nim' => ['required', 'numeric', 'max:8'],
+                'kelas' => ['required', 'max:6'],
                 'nama' => ['required'],
-                'angkatan' => ['required'],
-                'nomor_telepon' => ['required', 'numeric'],
+                'angkatan' => ['required', 'max:4'],
+                'nomor_telepon' => ['required', 'numeric', 'max:20'],
                 'tgl_kunjungan' => ['required'],
             ],
             [
                 'nim.required' => 'Nim tidak boleh kosong',
                 'nim.numeric' => 'Nim harus berupa angka',
+                'nim.max' => 'Nim tidak boleh lebih dari 8 angka',
                 'kelas.required' => 'Kelas tidak boleh kosong',
+                'kelas.max' => 'Kelas tidak boleh lebih dari 6 karakter',
                 'nama.required' => 'Nama tidak boleh kosong',
                 'angkatan.required' => 'Angkatan tidak boleh kosong',
+                'angkatan.max' => 'Angkatan tidak boleh lebih dari 4 karakter',
                 'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
                 'nomor_telepon.numeric' => 'Nomor telepon harus berupa angka',
+                'nomor_telepon.max' => 'Nomor telepon tidak boleh lebih dari 20 angka',
                 'tgl_kunjungan.required' => 'Tanggal kunjungan tidak boleh kosong',
             ]
         );

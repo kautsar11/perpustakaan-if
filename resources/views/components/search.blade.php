@@ -7,7 +7,11 @@
         <input type="hidden" name="sampai" value="{{ request('sampai') }}">
     @endif
 
-    <div class="input-group input-group-sm mb-3">
+    @if (request('status'))
+        <input type="hidden" name="status" value="{{ request('status') }}">
+    @endif
+
+    <div {{ $attributes->merge(['class'=>'input-group input-group-sm mb-3']) }}>
         <input type="text" class="form-control" placeholder="{{ $attributes['placeholder'] }}"
             value="{{ request('search') }}" name="search" />
     </div>

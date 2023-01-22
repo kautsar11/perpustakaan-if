@@ -9,7 +9,7 @@
         <section class="section">
             <x-card excelRoute="pengunjung.export" :title="$title" tambah_data="{{ route('pengunjung.tambah') }}">
 
-                {{-- filter search --}}
+                {{-- filter tanggal --}}
                 <x-slot name="filterSearch">
                     <form action="pengunjung" method="get">
                         @if (request('search'))
@@ -36,8 +36,10 @@
                 </x-slot>
 
                 {{-- search --}}
-                <x-slot name="search">
-                    <x-search action="pengunjung" placeholder="Cari pengunjung..." />
+                <x-slot name="searchTop">
+                <div class="d-flex justify-content-end">
+                    <x-search class="mt-3" action="pengunjung" placeholder="Cari pengunjung..." />
+                </div>
                 </x-slot>
 
                 {{-- table --}}
@@ -52,6 +54,7 @@
                             'Angkatan',
                             'No Telp',
                             'Tanggal Kunjungan',
+                            'Nama Petugas',
                             '',
                         ]">
                             @foreach ($pengunjung as $p)
@@ -64,6 +67,7 @@
                                     <td>{{ $p->angkatan }}</td>
                                     <td>{{ $p->nomor_telepon }}</td>
                                     <td>{{ date('d-m-Y', strtotime($p->tgl_kunjungan)) }}</td>
+                                    <td>{{ $p->petugas->nama }}</td>
                                     <td class="d-flex gap-3">
                                         <x-button-link class="btn-success"
                                             href="{{ route('pengunjung.edit', $p->id) }}">

@@ -43,7 +43,7 @@
                     @else
                         <p class="text-center">Tidak ada data</p>
                     @endif
-                    {{ $buku->links() }}
+                    {{ $buku->onEachSide(3)->links() }}
                 </x-slot>
             </x-card>
         </section>

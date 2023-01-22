@@ -20,11 +20,13 @@ class Peminjaman extends Model
     public function scopeSearch(Builder $query, $search)
     {
         $query->when(
-            request()->is('peminjaman'),
+            request()->is('peminjaman') || request()->is('peminjaman/export'),
             fn () => $query
                 ->where('no_peminjaman', 'like', '%' . $search . '%')
                 ->orWhere('nim_petugas_pinjam', 'like', '%' . $search . '%')
                 ->orWhere('nim_petugas_kembali', 'like', '%' . $search . '%')
+                ->orWhere('nim_peminjam', 'like', '%' . $search . '%')
+                ->orWhere('nama_peminjam', 'like', '%' . $search . '%')
         );
     }
 

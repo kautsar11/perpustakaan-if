@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if (auth()->user()->role !== 'admin') {
-            abort(404);
+            return redirect('buku');
         }
 
         return $next($request);

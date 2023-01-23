@@ -84,6 +84,7 @@
                             'Petugas Peminjam',
                             'Tanggal Kembali',
                             'Petugas Pengembalian',
+                            'Keterangan'
                             'Status',
                             '',
                         ]">
@@ -99,6 +100,7 @@
                                     <td>{{ $p->tgl_kembali ? date('d-m-Y', strtotime($p->tgl_kembali)) : '' }}</td>
                                     <td>{{ $p->nama_petugas_kembali }}</td>
                                     <td>{{ $p->status }}</td>
+                                    <td>{{ $p->keterangan }}</td>
                                     <td>
                                         <div class="d-flex gap-3">
                                             <x-button-link class="btn-success"

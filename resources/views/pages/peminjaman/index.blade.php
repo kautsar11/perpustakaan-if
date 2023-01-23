@@ -84,8 +84,8 @@
                             'Petugas Peminjam',
                             'Tanggal Kembali',
                             'Petugas Pengembalian',
-                            'Keterangan'
                             'Status',
+                            'Keterangan',
                             '',
                         ]">
                             @foreach ($peminjaman as $p)

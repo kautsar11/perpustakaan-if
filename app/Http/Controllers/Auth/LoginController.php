@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         $credentials = request()->validate(
             [
-                'nim' => ['required', 'regex:/[0-9]{9}/'],
+                'nim' => ['required', 'regex:/[0-9]'{9}/'],
                 'password' => ['required']
             ],
             [

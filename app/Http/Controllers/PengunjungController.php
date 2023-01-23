@@ -74,11 +74,11 @@ class PengunjungController extends Controller
 
         return request()->validate(
             [
-                'nim' => ['required', 'regex:/[0-9]{9}/', 'min:0', 'max:8'],
+                'nim' => ['required', 'regex:/[0-9]/', 'min:0', 'max:8'],
                 'kelas' => ['required', 'min:0', 'max:6'],
                 'nama' => ['required'],
                 'angkatan' => ['required', 'min:0', 'max:4'],
-                'nomor_telepon' => ['required', 'regex:/[0-9]{9}/', 'min:0', 'max:20'],
+                'nomor_telepon' => ['required', 'regex:/[0-9]/', 'min:0', 'max:20'],
                 'tgl_kunjungan' => ['required'],
             ],
             [

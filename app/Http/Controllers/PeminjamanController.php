@@ -96,8 +96,8 @@ class PeminjamanController extends Controller
 
         return request()->validate(
             [
-                'no_buku' => [],
-                'nim_peminjam' => ['required', 'max:8'],
+                'no_buku' => ['required'],
+                'nim_peminjam' => ['required', 'min:0', 'max:8'],
                 'nama_peminjam' => ['required'],
                 'tgl_pinjam' => ['required'],
             ],

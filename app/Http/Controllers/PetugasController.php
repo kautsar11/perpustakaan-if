@@ -62,13 +62,12 @@ class PetugasController extends Controller
 
         return request()->validate(
             [
-                'nim' => ['required', 'numeric', 'max:8', Rule::unique('petugas', 'nim')->ignore($petugas)],
+                'nim' => ['required', 'regex:/[0-9]/', Rule::unique('petugas', 'nim')->ignore($petugas), 'min:0', 'max:8'],
                 'nama' => ['required'],
                 'password' => ['required']
             ],
             [
                 'nim.required' => 'Nim tidak boleh kosong',
-                'nim.numeric' => 'Nim harus berupa angka',
                 'nim.max' => 'Nim tidak boleh lebih dari 8 angka',
                 'nim.unique' => 'Nim sudah terdaftar',
                 'nama.required' => 'Nama tidak boleh kosong',

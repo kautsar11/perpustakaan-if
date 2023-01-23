@@ -24,8 +24,8 @@ return new class extends Migration
             $table->date('tgl_kembali')->nullable();
             $table->enum('status', ['dipinjam', 'dikembalikan', 'hilang'])->nullable();
             $table->text('keterangan')->nullable();
-            $table->foreign('nim_petugas_pinjam')->references('nim')->on('petugas');
-            $table->foreign('no_buku')->references('no_buku')->on('buku');
+            $table->foreign('nim_petugas_pinjam')->references('nim')->on('petugas')->cascadeOnDelete();
+            $table->foreign('no_buku')->references('no_buku')->on('buku')->cascadeOnDelete();
         });
     }
 

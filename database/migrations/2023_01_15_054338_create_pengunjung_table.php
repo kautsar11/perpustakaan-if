@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('angkatan', 4);
             $table->string('nomor_telepon', 20);
             $table->date('tgl_kunjungan');
-            $table->foreign('nim_petugas')->references('nim')->on('petugas');
+            $table->foreign('nim_petugas')->references('nim')->on('petugas')->cascadeOnDelete();
         });
     }
 

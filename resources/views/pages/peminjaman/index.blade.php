@@ -84,6 +84,7 @@
                             'Petugas Peminjam',
                             'Tanggal Kembali',
                             'Petugas Pengembalian',
+                            'Keterangan'
                             'Status',
                             '',
                         ]">

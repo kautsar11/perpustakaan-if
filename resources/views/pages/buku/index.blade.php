@@ -1,5 +1,5 @@
 @php
-    $title = 'Buku';
+$title = 'Buku';
 @endphp
 
 <x-layouts.base :pageTitle="$title">
@@ -17,33 +17,33 @@
                 {{-- table --}}
                 <x-slot name="table">
                     @if ($buku->count())
-                        <x-table.table :headers="['No', 'No Buku', 'Judul', 'Penulis', 'Jenis', '']">
-                            @foreach ($buku as $b)
-                                <tr>
-                                    <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $b->no_buku }}</td>
-                                    <td>{{ $b->judul }}</td>
-                                    <td>{{ $b->penulis }}</td>
-                                    <td>{{ $b->jenis }}</td>
-                                    <td class="d-flex gap-3">
-                                        <x-button-link class="btn-success" href="{{ route('buku.edit', $b->no_buku) }}">
-                                            Edit</x-button-link>
+                    <x-table.table :headers="['No', 'No Buku', 'Judul', 'Penulis', 'Jenis', '']">
+                        @foreach ($buku as $b)
+                        <tr>
+                            <td scope="row">{{ $loop->iteration }}</td>
+                            <td>{{ $b->no_buku }}</td>
+                            <td>{{ $b->judul }}</td>
+                            <td>{{ $b->penulis }}</td>
+                            <td>{{ $b->jenis }}</td>
+                            <td class="d-flex gap-3">
+                                <x-button-link class="btn-success" href="{{ route('buku.edit', $b->no_buku) }}">
+                                    Edit</x-button-link>
 
-                                        <form action="{{ route('buku.hapus', $b->no_buku) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <x-form.submit-button class="btn-danger btn-sm show_confirm_delete">
-                                                Hapus
-                                            </x-form.submit-button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </x-table.table>
+                                <form action="{{ route('buku.hapus', $b->no_buku) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-form.submit-button class="btn-danger btn-sm show_confirm_delete">
+                                        Hapus
+                                    </x-form.submit-button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </x-table.table>
                     @else
-                        <p class="text-center">Tidak ada data</p>
+                    <p class="text-center">Tidak ada data</p>
                     @endif
-                    {{ $buku->onEachSide(3)->links() }}
+                    {{ $buku->appends(request()->query())->links() }}
                 </x-slot>
             </x-card>
         </section>

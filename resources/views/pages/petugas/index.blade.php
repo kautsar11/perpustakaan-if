@@ -43,7 +43,7 @@
                     @else
                         <p class="text-center">Tidak ada data</p>
                     @endif
-                    {{ $petugas->links() }}
+                    {{ $petugas->appends(request()->query())->links() }}
                 </x-slot>
             </x-card>
         </section>

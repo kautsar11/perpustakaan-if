@@ -97,13 +97,12 @@ class PeminjamanController extends Controller
 
         return request()->validate(
             [
-                'no_buku' => [Rule::exists('peminjaman', 'no_buku')],
+                'no_buku' => [],
                 'nim_peminjam' => ['required', 'regex:/^[0-9]{8}$/'],
                 'nama_peminjam' => ['required'],
                 'tgl_pinjam' => ['required'],
             ],
             [
-                'no_buku.exist' => 'Buku tidak terdaftar',
                 'nim_peminjam.required' => 'Nim tidak boleh kosong',
                 'nim_peminjam.regex' => 'Format nim tidak sesuai',
                 'nama_peminjam.required' => 'Nama tidak boleh kosong',

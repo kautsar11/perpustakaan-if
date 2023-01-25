@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Models\Peminjaman;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 
 class PeminjamanExport implements FromQuery

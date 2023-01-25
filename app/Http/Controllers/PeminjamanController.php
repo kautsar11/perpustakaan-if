@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\PeminjamanExport;
 use App\Models\Buku;
 use App\Models\Peminjaman;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PeminjamanController extends Controller
@@ -96,15 +97,15 @@ class PeminjamanController extends Controller
 
         return request()->validate(
             [
-                'no_buku' => ['required'],
-                'nim_peminjam' => ['required', 'min:0', 'max:8'],
+                'no_buku' => [Rule::exists('peminjaman', 'no_buku')],
+                'nim_peminjam' => ['required', 'regex:/^[0-9]{8}$/'],
                 'nama_peminjam' => ['required'],
                 'tgl_pinjam' => ['required'],
             ],
             [
                 'no_buku.exist' => 'Buku tidak terdaftar',
                 'nim_peminjam.required' => 'Nim tidak boleh kosong',
-                'nim_peminjam.required' => 'Nim tidak boleh lebih dari 8 angka',
+                'nim_peminjam.regex' => 'Format nim tidak sesuai',
                 'nama_peminjam.required' => 'Nama tidak boleh kosong',
                 'tgl_pinjam.required' => 'Tanggal kunjungan tidak boleh kosong',
             ]

@@ -74,7 +74,7 @@ class PengunjungController extends Controller
 
         return request()->validate(
             [
-                'nim' => ['required', 'regex:/[0-9]/', 'min:0', 'max:8'],
+                'nim' => ['required', 'regex:/^[0-9]{8}$/'],
                 'kelas' => ['required', 'min:0', 'max:6'],
                 'nama' => ['required'],
                 'angkatan' => ['required', 'min:0', 'max:4'],
@@ -83,7 +83,7 @@ class PengunjungController extends Controller
             ],
             [
                 'nim.required' => 'Nim tidak boleh kosong',
-                'nim.max' => 'Nim tidak boleh lebih dari 8 angka',
+                'nim.regex' => 'Format nim tidak sesuai',
                 'kelas.required' => 'Kelas tidak boleh kosong',
                 'kelas.max' => 'Kelas tidak boleh lebih dari 6 karakter',
                 'nama.required' => 'Nama tidak boleh kosong',

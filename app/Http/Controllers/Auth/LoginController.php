@@ -17,12 +17,12 @@ class LoginController extends Controller
     {
         $credentials = request()->validate(
             [
-                'nim' => ['required', 'regex:/[0-9]/'],
+                'nim' => ['required', 'regex:/^[0-9]{8}$/'],
                 'password' => ['required']
             ],
             [
                 'nim.required' => 'Nim tidak boleh kosong',
-                'nim.numeric' => 'Nim harus berupa angka',
+                'nim.regex' => 'Format nim tidak sesuai',
                 'password.required' => 'Password tidak boleh kosong',
             ]
         );

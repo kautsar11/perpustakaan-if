@@ -78,7 +78,7 @@ class PengunjungController extends Controller
                 'kelas' => ['required', 'min:0', 'max:6'],
                 'nama' => ['required'],
                 'angkatan' => ['required', 'min:0', 'max:4'],
-                'nomor_telepon' => ['required', 'regex:/[0-9]/', 'min:0', 'max:20'],
+                'nomor_telepon' => ['required', 'regex:/^[0-9]{0,20}$/', 'min:0', 'max:20'],
                 'tgl_kunjungan' => ['required'],
             ],
             [
@@ -90,6 +90,7 @@ class PengunjungController extends Controller
                 'angkatan.required' => 'Angkatan tidak boleh kosong',
                 'angkatan.max' => 'Angkatan tidak boleh lebih dari 4 karakter',
                 'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
+                'nomor_telepon.regex' => 'Format nomor telepon tidak sesuai',
                 'nomor_telepon.max' => 'Nomor telepon tidak boleh lebih dari 20 angka',
                 'tgl_kunjungan.required' => 'Tanggal kunjungan tidak boleh kosong',
             ]

@@ -60,14 +60,14 @@
                             @foreach ($pengunjung as $p)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $p->id }}</td>
+                                    <td class="text-center">{{ $p->id }}</td>
                                     <td>{{ $p->nim }}</td>
                                     <td>{{ $p->nama }}</td>
                                     <td>{{ $p->kelas }}</td>
                                     <td>{{ $p->angkatan }}</td>
                                     <td>{{ $p->nomor_telepon }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($p->tgl_kunjungan)) }}</td>
-                                    <td>{{ $p->petugas->nama }}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($p->tgl_kunjungan)) }}</td>
+                                    <td class="text-center">{{ $p->petugas->nama }}</td>
                                     <td class="d-flex gap-3">
                                         <x-button-link class="btn-success"
                                             href="{{ route('pengunjung.edit', $p->id) }}">

@@ -2,7 +2,7 @@
     <main class="container my-auto">
         <div class="w-50 mx-auto">
             <div class="card recent-sales overflow-auto">
-                <h1 class="text-center">Ubah Peminjaman</h1>
+                <h1 class="text-center">Pengembalian</h1>
                 <div class="card-body p-5">
                     <form action="{{ route('pengembalian.simpan',$peminjaman->no_peminjaman) }}" method="POST">
                         @csrf

@@ -4,25 +4,9 @@ namespace App\Exports;
 
 use App\Models\Pengunjung;
 use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class PengunjungExport implements FromQuery, WithHeadings
+class PengunjungExport implements FromQuery
 {
-
-    public function headings(): array
-    {
-        return [
-            'No',
-            'Nomor Pengunjung',
-            'Nim',
-            'Nama',
-            'Kelas',
-            'Angkatan',
-            'No Telp',
-            'Tanggal Kunjungan',
-        ];
-    }
-
     public function query()
     {
         return Pengunjung::query()
